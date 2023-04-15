@@ -14,8 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class ForgingAhead
 {
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "examplemod";
-    // Directly reference a slf4j logger
+    public static final String MODID = "forgingahead";
 
     public ForgingAhead()
     {
