@@ -3,6 +3,7 @@ package com.nerdcraftmc.forgingahead;
 import com.nerdcraftmc.forgingahead.block.BlockRegistry;
 import com.nerdcraftmc.forgingahead.block.entity.BlockEntityRegistry;
 import com.nerdcraftmc.forgingahead.item.ItemRegistry;
+import com.nerdcraftmc.forgingahead.recipe.RecipeTypeRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,6 +29,7 @@ public class ForgingAhead
         ItemRegistry.register(modEventBus);
         BlockRegistry.BLOCKS.register(modEventBus);
         BlockEntityRegistry.register(modEventBus);
+        RecipeTypeRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);

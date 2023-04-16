@@ -1,0 +1,14 @@
+{
+  "type": "forgingahead:forge",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond_hoe"
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "output": {
+    "item": "forgingahead:coal_powder"
+  }
+}
