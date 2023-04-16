@@ -1,5 +1,6 @@
 package com.nerdcraftmc.forgingahead;
 
+import com.nerdcraftmc.forgingahead.blocks.BlockRegistry;
 import com.nerdcraftmc.forgingahead.items.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,6 +25,7 @@ public class ForgingAhead
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ItemRegistry.register(modEventBus);
+        BlockRegistry.BLOCKS.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
@@ -40,6 +42,9 @@ public class ForgingAhead
             event.accept(ItemRegistry.COAL_ALLOY);
             event.accept(ItemRegistry.COPPER_ALLOY);
             event.accept(ItemRegistry.IRON_ALLOY);
+        }
+        else if (event.getTab() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(BlockRegistry.FORGE);
         }
     }
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
