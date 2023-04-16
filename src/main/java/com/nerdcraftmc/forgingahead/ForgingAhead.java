@@ -1,7 +1,7 @@
 package com.nerdcraftmc.forgingahead;
 
-import com.nerdcraftmc.forgingahead.block.entity.BlockEntityRegistry;
 import com.nerdcraftmc.forgingahead.block.BlockRegistry;
+import com.nerdcraftmc.forgingahead.block.entity.BlockEntityRegistry;
 import com.nerdcraftmc.forgingahead.item.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,6 +41,15 @@ public class ForgingAhead
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ItemRegistry.FYRALITE_POWDER);
+            event.accept(ItemRegistry.COAL_POWDER);
+            event.accept(ItemRegistry.COPPER_POWDER);
+            event.accept(ItemRegistry.IRON_POWDER);
+            event.accept(ItemRegistry.GOLD_POWDER);
+            event.accept(ItemRegistry.LAPIS_LAZULI_POWDER);
+            event.accept(ItemRegistry.NETHER_QUARTZ_POWDER);
+            event.accept(ItemRegistry.EMERALD_POWDER);
+            event.accept(ItemRegistry.DIAMOND_POWDER);
+            event.accept(ItemRegistry.NETHERITE_POWDER);
             event.accept(ItemRegistry.COAL_ALLOY);
             event.accept(ItemRegistry.COPPER_ALLOY);
             event.accept(ItemRegistry.IRON_ALLOY);
