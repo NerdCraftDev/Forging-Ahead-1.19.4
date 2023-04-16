@@ -42,6 +42,13 @@ public class ForgingAhead
             event.accept(ItemRegistry.COAL_ALLOY);
             event.accept(ItemRegistry.COPPER_ALLOY);
             event.accept(ItemRegistry.IRON_ALLOY);
+            event.accept(ItemRegistry.GOLD_ALLOY);
+            event.accept(ItemRegistry.REDSTONE_ALLOY);
+            event.accept(ItemRegistry.LAPIS_LAZULI_ALLOY);
+            event.accept(ItemRegistry.NETHER_QUARTZ_ALLOY);
+            event.accept(ItemRegistry.EMERALD_ALLOY);
+            event.accept(ItemRegistry.DIAMOND_ALLOY);
+            event.accept(ItemRegistry.NETHERITE_ALLOY);
         }
         else if (event.getTab() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(BlockRegistry.FORGE);

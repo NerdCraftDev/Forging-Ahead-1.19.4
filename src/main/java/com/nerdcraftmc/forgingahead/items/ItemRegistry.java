@@ -18,6 +18,20 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> IRON_ALLOY = ITEMS.register("iron_alloy",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOLD_ALLOY = ITEMS.register("gold_alloy",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> REDSTONE_ALLOY = ITEMS.register("redstone_alloy",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LAPIS_LAZULI_ALLOY = ITEMS.register("lapis_alloy",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NETHER_QUARTZ_ALLOY = ITEMS.register("quartz_alloy",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EMERALD_ALLOY = ITEMS.register("emerald_alloy",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DIAMOND_ALLOY = ITEMS.register("diamond_alloy",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NETHERITE_ALLOY = ITEMS.register("netherite_alloy",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
