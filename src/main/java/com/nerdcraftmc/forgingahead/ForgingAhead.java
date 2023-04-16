@@ -1,5 +1,6 @@
 package com.nerdcraftmc.forgingahead;
 
+import com.nerdcraftmc.forgingahead.blocks.BlockEntityRegistry;
 import com.nerdcraftmc.forgingahead.blocks.BlockRegistry;
 import com.nerdcraftmc.forgingahead.items.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -26,6 +27,7 @@ public class ForgingAhead
 
         ItemRegistry.register(modEventBus);
         BlockRegistry.BLOCKS.register(modEventBus);
+        BlockEntityRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);

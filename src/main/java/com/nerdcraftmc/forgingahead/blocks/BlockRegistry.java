@@ -31,7 +31,7 @@ public class BlockRegistry
     public static final RegistryObject<Block> FORGE = register("forge", Blocks.SMITHING_TABLE);
 
     public static RegistryObject<Block> register(String registryName, Block blockToCopy) {
-        RegistryObject<Block> block = BLOCKS.register(registryName, () -> new Block(BlockBehaviour.Properties.copy(blockToCopy)));
+        RegistryObject<Block> block = BLOCKS.register(registryName, () -> new ForgeBlock(BlockBehaviour.Properties.copy(blockToCopy)));
         registerBlockItem(registryName, block);
         return block;
     }
