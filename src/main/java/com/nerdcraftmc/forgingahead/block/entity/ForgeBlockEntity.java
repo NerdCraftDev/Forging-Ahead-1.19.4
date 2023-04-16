@@ -1,6 +1,7 @@
 package com.nerdcraftmc.forgingahead.block.entity;
 
 import com.nerdcraftmc.forgingahead.item.ItemRegistry;
+import com.nerdcraftmc.forgingahead.recipe.ForgeRecipe;
 import com.nerdcraftmc.forgingahead.screen.ForgeMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,6 +26,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class ForgeBlockEntity extends BlockEntity implements MenuProvider
 {
@@ -103,6 +106,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
+        pTag.putInt("forge.progress", this.progress);
 
         super.saveAdditional(pTag);
     }
@@ -112,6 +116,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
         super.load(pTag);
 
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
+        progress = pTag.getInt("forge.progress");
     }
 
     public void drops() {
@@ -146,23 +151,31 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private static void craftItem(ForgeBlockEntity pEntity) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+        Optional<ForgeRecipe> recipe = level.getRecipeManager().getRecipeFor(ForgeRecipe.Type.INSTANCE, inventory, level);
+
         if (hasRecipe(pEntity)) {
             pEntity.itemHandler.extractItem(0, 1, false);
             pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.setStackInSlot(1,new ItemStack(ItemRegistry.COAL_ALLOY.get(),
-                    pEntity.itemHandler.getStackInSlot(1).getCount() + 1));
+            pEntity.itemHandler.setStackInSlot(2, new ItemStack(ItemRegistry.COAL_POWDER.get(),
+                    pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
             pEntity.resetProgress();
         }
     }
 
     private static boolean hasRecipe(ForgeBlockEntity pEntity) {
+        Level level = pEntity.level;
         SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
         for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasFyralitePowderInFirstSlot = pEntity.itemHandler.getStackInSlot(0).getItem() == ItemRegistry.FYRALITE_POWDER.get();
-        boolean hasCoalInSecondSlot = pEntity.itemHandler.getStackInSlot(1).getItem() == Items.COAL;
-        return hasFyralitePowderInFirstSlot && hasCoalInSecondSlot && inventory.canAddItem(new ItemStack(ItemRegistry.COAL_ALLOY.get()));
+        Optional<ForgeRecipe> recipe = level.getRecipeManager().getRecipeFor(ForgeRecipe.Type.INSTANCE, inventory, level);
+
+        return recipe.isPresent() && inventory.canAddItem(recipe.get().output);
     }
 }

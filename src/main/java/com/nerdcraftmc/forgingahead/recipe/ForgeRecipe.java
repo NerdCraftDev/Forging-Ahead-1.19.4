@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class ForgeRecipe implements Recipe<SimpleContainer>
 {
     private final ResourceLocation id;
-    private final ItemStack output;
+    public final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
     public ForgeRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
@@ -33,7 +33,7 @@ public class ForgeRecipe implements Recipe<SimpleContainer>
             return false;
         }
 
-        return recipeItems.get(0).test(pContainer.getItem(1));
+        return recipeItems.get(0).test(pContainer.getItem(0)) && recipeItems.get(1).test(pContainer.getItem(1));
     }
 
     @Override
