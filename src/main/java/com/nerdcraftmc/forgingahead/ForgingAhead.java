@@ -26,6 +26,7 @@ public class ForgingAhead
         ItemRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::addCreative);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
