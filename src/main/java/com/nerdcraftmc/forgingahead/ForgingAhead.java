@@ -37,6 +37,9 @@ public class ForgingAhead
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ItemRegistry.FYRALITE_POWDER);
+            event.accept(ItemRegistry.COAL_ALLOY);
+            event.accept(ItemRegistry.COPPER_ALLOY);
+            event.accept(ItemRegistry.IRON_ALLOY);
         }
     }
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
