@@ -1,5 +1,6 @@
 package com.nerdcraftmc.forgingahead.block.entity;
 
+import com.nerdcraftmc.forgingahead.item.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -10,6 +11,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -30,9 +35,35 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    protected final ContainerData data;
+    private int progress = 0;
+    private int maxProgress = 80;
     public ForgeBlockEntity(BlockPos pPos, BlockState pBlockState)
     {
         super(BlockEntityRegistry.FORGE.get(), pPos, pBlockState);
+        this.data = new ContainerData() {
+            @Override
+            public int get(int pIndex) {
+                return switch (pIndex) {
+                    case 0 -> ForgeBlockEntity.this.progress;
+                    case 1 -> ForgeBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int pIndex, int pValue) {
+                switch (pIndex) {
+                    case 0 -> ForgeBlockEntity.this.progress = pValue;
+                    case 1 -> ForgeBlockEntity.this.maxProgress = pValue;
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
     }
 
     @Override
@@ -89,5 +120,48 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
         }
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
+    }
+
+    public static <E extends BlockEntity> void tick(Level pLevel, BlockPos pPos, BlockState pState, ForgeBlockEntity pEntity) {
+        if (pLevel.isClientSide()) {
+            return;
+        }
+        if (hasRecipe(pEntity)) {
+            pEntity.progress++;
+            setChanged(pLevel, pPos, pState);
+
+            if (pEntity.progress >= pEntity.maxProgress) {
+                craftItem(pEntity);
+            }
+        }
+        else {
+            pEntity.resetProgress();
+            setChanged(pLevel, pPos, pState);
+        }
+    }
+
+    private void resetProgress() {
+        this.progress = 0;
+    }
+
+    private static void craftItem(ForgeBlockEntity pEntity) {
+        if (hasRecipe(pEntity)) {
+            pEntity.itemHandler.extractItem(0, 1, false);
+            pEntity.itemHandler.extractItem(1, 1, false);
+            pEntity.itemHandler.setStackInSlot(1,new ItemStack(ItemRegistry.COAL_ALLOY.get(),
+                    pEntity.itemHandler.getStackInSlot(1).getCount() + 1));
+            pEntity.resetProgress();
+        }
+    }
+
+    private static boolean hasRecipe(ForgeBlockEntity pEntity) {
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+
+        boolean hasFyralitePowderInFirstSlot = pEntity.itemHandler.getStackInSlot(0).getItem() == ItemRegistry.FYRALITE_POWDER.get();
+        boolean hasCoalInSecondSlot = pEntity.itemHandler.getStackInSlot(1).getItem() == Items.COAL;
+        return hasFyralitePowderInFirstSlot && hasCoalInSecondSlot && inventory.canAddItem(new ItemStack(ItemRegistry.COAL_ALLOY.get()));
     }
 }
