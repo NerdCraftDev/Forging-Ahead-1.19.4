@@ -1,6 +1,7 @@
 package com.nerdcraftmc.forgingahead.block.entity;
 
 import com.nerdcraftmc.forgingahead.item.ItemRegistry;
+import com.nerdcraftmc.forgingahead.screen.ForgeMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -76,7 +77,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer)
     {
-        return null;
+        return new ForgeMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
     @Override

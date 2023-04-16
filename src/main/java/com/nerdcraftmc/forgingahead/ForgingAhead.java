@@ -4,6 +4,9 @@ import com.nerdcraftmc.forgingahead.block.BlockRegistry;
 import com.nerdcraftmc.forgingahead.block.entity.BlockEntityRegistry;
 import com.nerdcraftmc.forgingahead.item.ItemRegistry;
 import com.nerdcraftmc.forgingahead.recipe.RecipeTypeRegistry;
+import com.nerdcraftmc.forgingahead.screen.ForgeScreen;
+import com.nerdcraftmc.forgingahead.screen.MenuRegistry;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +33,7 @@ public class ForgingAhead
         BlockRegistry.BLOCKS.register(modEventBus);
         BlockEntityRegistry.register(modEventBus);
         RecipeTypeRegistry.register(modEventBus);
+        MenuRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
@@ -73,7 +77,7 @@ public class ForgingAhead
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            MenuScreens.register(MenuRegistry.FORGE_MENU.get(), ForgeScreen::new);
         }
     }
 }
