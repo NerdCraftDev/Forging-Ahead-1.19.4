@@ -1,7 +1,10 @@
 package com.nerdcraftmc.forgingahead;
 
+import com.nerdcraftmc.forgingahead.items.ItemRegistry;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,16 +23,21 @@ public class ForgingAhead
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register the commonSetup method for modloading
+        ItemRegistry.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
 
     }
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+
+    private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ItemRegistry.FYRALITE_POWDER);
+        }
+    }
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
