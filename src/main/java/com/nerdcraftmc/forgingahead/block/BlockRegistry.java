@@ -1,7 +1,7 @@
-package com.nerdcraftmc.forgingahead.blocks;
+package com.nerdcraftmc.forgingahead.block;
 
 import com.nerdcraftmc.forgingahead.ForgingAhead;
-import com.nerdcraftmc.forgingahead.items.ItemRegistry;
+import com.nerdcraftmc.forgingahead.item.ItemRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

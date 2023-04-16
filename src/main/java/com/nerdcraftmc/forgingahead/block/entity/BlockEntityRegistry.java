@@ -1,6 +1,7 @@
-package com.nerdcraftmc.forgingahead.blocks;
+package com.nerdcraftmc.forgingahead.block.entity;
 
 import com.nerdcraftmc.forgingahead.ForgingAhead;
+import com.nerdcraftmc.forgingahead.block.BlockRegistry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

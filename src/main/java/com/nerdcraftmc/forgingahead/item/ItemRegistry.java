@@ -1,4 +1,4 @@
-package com.nerdcraftmc.forgingahead.items;
+package com.nerdcraftmc.forgingahead.item;
 
 import com.nerdcraftmc.forgingahead.ForgingAhead;
 import net.minecraft.world.item.Item;

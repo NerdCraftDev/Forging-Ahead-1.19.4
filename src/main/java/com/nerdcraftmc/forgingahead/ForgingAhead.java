@@ -1,8 +1,8 @@
 package com.nerdcraftmc.forgingahead;
 
-import com.nerdcraftmc.forgingahead.blocks.BlockEntityRegistry;
-import com.nerdcraftmc.forgingahead.blocks.BlockRegistry;
-import com.nerdcraftmc.forgingahead.items.ItemRegistry;
+import com.nerdcraftmc.forgingahead.block.entity.BlockEntityRegistry;
+import com.nerdcraftmc.forgingahead.block.BlockRegistry;
+import com.nerdcraftmc.forgingahead.item.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;

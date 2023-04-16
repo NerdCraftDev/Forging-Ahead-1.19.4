@@ -1,4 +1,4 @@
-package com.nerdcraftmc.forgingahead.blocks;
+package com.nerdcraftmc.forgingahead.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
