@@ -20,9 +20,9 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GOLD_DUST = ITEMS.register("gold_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> LAPIS_LAZULI_DUST = ITEMS.register("lapis_dust",
+    public static final RegistryObject<Item> LAPIS_DUST = ITEMS.register("lapis_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> NETHER_QUARTZ_DUST = ITEMS.register("quartz_dust",
+    public static final RegistryObject<Item> QUARTZ_DUST = ITEMS.register("quartz_dust",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> EMERALD_DUST = ITEMS.register("emerald_dust",
             () -> new Item(new Item.Properties()));

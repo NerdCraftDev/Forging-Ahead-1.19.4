@@ -51,8 +51,8 @@ public class ForgingAhead
             event.accept(ItemRegistry.COPPER_DUST);
             event.accept(ItemRegistry.IRON_DUST);
             event.accept(ItemRegistry.GOLD_DUST);
-            event.accept(ItemRegistry.LAPIS_LAZULI_DUST);
-            event.accept(ItemRegistry.NETHER_QUARTZ_DUST);
+            event.accept(ItemRegistry.LAPIS_DUST);
+            event.accept(ItemRegistry.QUARTZ_DUST);
             event.accept(ItemRegistry.EMERALD_DUST);
             event.accept(ItemRegistry.DIAMOND_DUST);
             event.accept(ItemRegistry.NETHERITE_DUST);
