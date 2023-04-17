@@ -29,7 +29,7 @@ public class ForgeRecipe implements Recipe<SimpleContainer>
     @Override
     public boolean matches(@NotNull SimpleContainer pContainer, @NotNull Level pLevel)
     {
-        if(pLevel.isClientSide()) {
+        if (pLevel.isClientSide()) {
             return false;
         }
 
@@ -81,12 +81,14 @@ public class ForgeRecipe implements Recipe<SimpleContainer>
     public static class Type implements RecipeType<ForgeRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
+        @SuppressWarnings("unused")
         public static final String ID = "forge";
     }
 
 
     public static class Serializer implements RecipeSerializer<ForgeRecipe> {
         public static final Serializer INSTANCE = new Serializer();
+        @SuppressWarnings("unused")
         public static final ResourceLocation ID = new ResourceLocation(ForgingAhead.MODID, "forge");
 
         @Override
@@ -94,7 +96,7 @@ public class ForgeRecipe implements Recipe<SimpleContainer>
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
@@ -107,6 +109,7 @@ public class ForgeRecipe implements Recipe<SimpleContainer>
         public ForgeRecipe fromNetwork(@NotNull ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
+            //noinspection Java8ListReplaceAll
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buf));
             }
