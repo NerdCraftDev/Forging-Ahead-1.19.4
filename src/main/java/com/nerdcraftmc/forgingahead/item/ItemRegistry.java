@@ -53,6 +53,8 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NETHERITE_ALLOY = ITEMS.register("netherite_alloy",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FORGING_HAMMER = ITEMS.register("forging_hammer",
+            () -> new Item(new Item.Properties().defaultDurability(64)));
     public static final RegistryObject<Item> FYRALITE_HOE = ITEMS.register("pink_hoe",
             () -> new HoeItem(new ForgingAheadTier(0, 1000, 10.0F, 8.0F, 20, () -> {
                 return Ingredient.of(Items.STICK);

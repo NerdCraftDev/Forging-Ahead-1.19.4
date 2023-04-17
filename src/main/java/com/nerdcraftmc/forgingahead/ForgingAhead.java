@@ -72,6 +72,7 @@ public class ForgingAhead
         }
         else if (event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ItemRegistry.FYRALITE_HOE);
+            event.accept(ItemRegistry.FORGING_HAMMER);
         }
     }
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
