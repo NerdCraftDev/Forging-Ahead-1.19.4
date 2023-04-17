@@ -1,6 +1,5 @@
 package com.nerdcraftmc.forgingahead.block.entity;
 
-import com.nerdcraftmc.forgingahead.item.ItemRegistry;
 import com.nerdcraftmc.forgingahead.recipe.ForgeRecipe;
 import com.nerdcraftmc.forgingahead.screen.ForgeMenu;
 import net.minecraft.core.BlockPos;
@@ -119,15 +118,15 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     }
 
     public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(1, itemHandler.getStackInSlot(i));
-        }
+        SimpleContainer inventory = getInventory(itemHandler);
 
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        if (this.level != null)
+        {
+            Containers.dropContents(this.level, this.worldPosition, inventory);
+        }
     }
 
-    public static <E extends BlockEntity> void tick(Level pLevel, BlockPos pPos, BlockState pState, ForgeBlockEntity pEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ForgeBlockEntity pEntity) {
         if (pLevel.isClientSide()) {
             return;
         }
@@ -150,31 +149,41 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private static void craftItem(ForgeBlockEntity pEntity) {
-        Level level = pEntity.level;
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
-        Optional<ForgeRecipe> recipe = level.getRecipeManager().getRecipeFor(ForgeRecipe.Type.INSTANCE, inventory, level);
-
         if (hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.setStackInSlot(2, new ItemStack(ItemRegistry.COAL_DUST.get(),
-                    pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
-            pEntity.resetProgress();
+            Optional<ForgeRecipe> recipe = getRecipe(pEntity);
+            if (recipe.isPresent()) {
+                ItemStack outputItem = recipe.get().output;
+                int outputAmount = pEntity.itemHandler.getStackInSlot(3).getCount() + outputItem.getCount();
+                pEntity.itemHandler.extractItem(0, 1, false);
+                pEntity.itemHandler.extractItem(1, 1, false);
+                pEntity.itemHandler.extractItem(2, 1, false);
+                pEntity.itemHandler.setStackInSlot(3, new ItemStack(outputItem.getItem(), outputAmount));
+                pEntity.resetProgress();
+            }
         }
     }
 
     private static boolean hasRecipe(ForgeBlockEntity pEntity) {
-        Level level = pEntity.level;
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<ForgeRecipe> recipe = level.getRecipeManager().getRecipeFor(ForgeRecipe.Type.INSTANCE, inventory, level);
+        SimpleContainer inventory = getInventory(pEntity.itemHandler);
+        Optional<ForgeRecipe> recipe = getRecipe(pEntity);
 
         return recipe.isPresent() && inventory.canAddItem(recipe.get().output);
+    }
+
+    private static Optional<ForgeRecipe> getRecipe(ForgeBlockEntity pEntity) {
+        if (pEntity.level == null) return Optional.empty();
+        Level level = pEntity.level;
+        SimpleContainer inventory = getInventory(pEntity.itemHandler);
+
+        return level.getRecipeManager().getRecipeFor(ForgeRecipe.Type.INSTANCE, inventory, level);
+    }
+
+    private static SimpleContainer getInventory(ItemStackHandler itemHandler) {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+
+        return inventory;
     }
 }
