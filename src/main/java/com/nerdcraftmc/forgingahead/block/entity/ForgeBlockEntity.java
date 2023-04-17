@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -112,7 +111,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
     }
 
     @Override
-    public void load(CompoundTag pTag) {
+    public void load(@NotNull CompoundTag pTag) {
         super.load(pTag);
 
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
@@ -161,7 +160,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider
         if (hasRecipe(pEntity)) {
             pEntity.itemHandler.extractItem(0, 1, false);
             pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.setStackInSlot(2, new ItemStack(ItemRegistry.COAL_POWDER.get(),
+            pEntity.itemHandler.setStackInSlot(2, new ItemStack(ItemRegistry.COAL_DUST.get(),
                     pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
             pEntity.resetProgress();
         }

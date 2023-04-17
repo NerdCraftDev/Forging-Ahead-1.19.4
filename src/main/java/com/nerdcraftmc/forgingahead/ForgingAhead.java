@@ -46,16 +46,16 @@ public class ForgingAhead
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ItemRegistry.FYRALITE_POWDER);
-            event.accept(ItemRegistry.COAL_POWDER);
-            event.accept(ItemRegistry.COPPER_POWDER);
-            event.accept(ItemRegistry.IRON_POWDER);
-            event.accept(ItemRegistry.GOLD_POWDER);
-            event.accept(ItemRegistry.LAPIS_LAZULI_POWDER);
-            event.accept(ItemRegistry.NETHER_QUARTZ_POWDER);
-            event.accept(ItemRegistry.EMERALD_POWDER);
-            event.accept(ItemRegistry.DIAMOND_POWDER);
-            event.accept(ItemRegistry.NETHERITE_POWDER);
+            event.accept(ItemRegistry.FYRALITE_DUST);
+            event.accept(ItemRegistry.COAL_DUST);
+            event.accept(ItemRegistry.COPPER_DUST);
+            event.accept(ItemRegistry.IRON_DUST);
+            event.accept(ItemRegistry.GOLD_DUST);
+            event.accept(ItemRegistry.LAPIS_LAZULI_DUST);
+            event.accept(ItemRegistry.NETHER_QUARTZ_DUST);
+            event.accept(ItemRegistry.EMERALD_DUST);
+            event.accept(ItemRegistry.DIAMOND_DUST);
+            event.accept(ItemRegistry.NETHERITE_DUST);
             event.accept(ItemRegistry.COAL_ALLOY);
             event.accept(ItemRegistry.COPPER_ALLOY);
             event.accept(ItemRegistry.IRON_ALLOY);

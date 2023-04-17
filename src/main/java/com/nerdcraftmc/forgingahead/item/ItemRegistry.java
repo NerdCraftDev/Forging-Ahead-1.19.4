@@ -10,25 +10,25 @@ import net.minecraftforge.registries.RegistryObject;
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ForgingAhead.MODID);
 
-    public static final RegistryObject<Item> FYRALITE_POWDER = ITEMS.register("fyralite_powder",
+    public static final RegistryObject<Item> FYRALITE_DUST = ITEMS.register("fyralite_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> COAL_POWDER = ITEMS.register("coal_powder",
+    public static final RegistryObject<Item> COAL_DUST = ITEMS.register("coal_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> COPPER_POWDER = ITEMS.register("copper_powder",
+    public static final RegistryObject<Item> COPPER_DUST = ITEMS.register("copper_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> IRON_POWDER = ITEMS.register("iron_powder",
+    public static final RegistryObject<Item> IRON_DUST = ITEMS.register("iron_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GOLD_POWDER = ITEMS.register("gold_powder",
+    public static final RegistryObject<Item> GOLD_DUST = ITEMS.register("gold_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> LAPIS_LAZULI_POWDER = ITEMS.register("lapis_powder",
+    public static final RegistryObject<Item> LAPIS_LAZULI_DUST = ITEMS.register("lapis_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> NETHER_QUARTZ_POWDER = ITEMS.register("quartz_powder",
+    public static final RegistryObject<Item> NETHER_QUARTZ_DUST = ITEMS.register("quartz_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> EMERALD_POWDER = ITEMS.register("emerald_powder",
+    public static final RegistryObject<Item> EMERALD_DUST = ITEMS.register("emerald_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> DIAMOND_POWDER = ITEMS.register("diamond_powder",
+    public static final RegistryObject<Item> DIAMOND_DUST = ITEMS.register("diamond_dust",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> NETHERITE_POWDER = ITEMS.register("netherite_powder",
+    public static final RegistryObject<Item> NETHERITE_DUST = ITEMS.register("netherite_dust",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> COAL_ALLOY = ITEMS.register("coal_alloy",
             () -> new Item(new Item.Properties()));

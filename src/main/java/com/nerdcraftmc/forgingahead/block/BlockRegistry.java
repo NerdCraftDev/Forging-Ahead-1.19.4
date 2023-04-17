@@ -17,10 +17,10 @@ public class BlockRegistry
 
     // Hammer
     // Vanilla item
-    // = Vanilla item powder
+    // = Vanilla item dust
 
-    // Fyralite powder
-    // Vanilla item powder
+    // Fyralite dust
+    // Vanilla item dust
     // Magma cream
     // = Alloy
 
