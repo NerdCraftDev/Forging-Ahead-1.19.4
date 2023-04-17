@@ -1,7 +1,10 @@
 package com.nerdcraftmc.forgingahead.item;
 
 import com.nerdcraftmc.forgingahead.ForgingAhead;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -50,7 +53,10 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NETHERITE_ALLOY = ITEMS.register("netherite_alloy",
             () -> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> FYRALITE_HOE = ITEMS.register("pink_hoe",
+            () -> new HoeItem(new ForgingAheadTier(0, 1000, 10.0F, 8.0F, 20, () -> {
+                return Ingredient.of(Items.STICK);
+            }), 0, -1.0F, new Item.Properties()));
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
     }
