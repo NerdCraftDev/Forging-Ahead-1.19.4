@@ -1,0 +1,17 @@
+{
+  "type": "forgingahead:forge",
+  "ingredients": [
+    {
+      "item": "forgingahead:coal_dust"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "forgingahead:fyralite_dust"
+    }
+  ],
+  "output": {
+    "item": "forgingahead:coal_alloy"
+  }
+}
